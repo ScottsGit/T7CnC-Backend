@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 
-class Author(BaseModel):
+class User(BaseModel):
     name: str
     age: int
     

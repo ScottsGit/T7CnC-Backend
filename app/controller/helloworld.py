@@ -4,7 +4,7 @@ from fastapi import APIRouter
 
 router = APIRouter(
     prefix="/helloworld",
-    tags=['helloworld']
+    tags=['Hello World']
 )
 
 @router.get("/")
