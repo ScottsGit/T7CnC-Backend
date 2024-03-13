@@ -8,11 +8,25 @@ class Users(Base):
     __tablename__ = "users"
     
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    age = Column(Integer)
-    email = Column(String, unique=True)
+    username = Column(String, unique=True)
     password = Column(String)
     jwt_token = Column(String)
     plaid_access_token = Column(String)
     time_created = Column(DateTime(timezone=True), server_default=func.now())
     time_updated = Column(DateTime(timezone=True), onupdate=func.now())
+    
+    
+    
+from pydantic import BaseModel
+from datetime import datetime
+    
+class UserSchema(BaseModel):
+    username: str
+    password: str
+    jwt_token: str
+    plaid_access_token: str
+    time_created: datetime 
+    time_updated: datetime 
+
+    class Config:
+        orm_mode = True
