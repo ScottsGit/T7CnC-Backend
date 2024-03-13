@@ -13,4 +13,5 @@ PGAdmin is for PostgreSQL management.
 ### Setup Backend
 poetry install  
 poetry run start  
-Go to http://localhost:8888/docs  
+Go to http://localhost:8888/docs, you should see:  
+![image](https://github.com/ScottsGit/T7CnC-Backend/assets/17536863/7df59bbe-c02d-4fe4-ac32-769216e33d18)  
