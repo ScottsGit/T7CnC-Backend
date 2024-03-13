@@ -9,6 +9,5 @@ class UserService:
 
     @staticmethod
     async def get_user_profile(username:str):
-        query = select(Users.username, 
-                        Users.email)
+        query = select(Users.username)
         return (await db.execute(query)).mappings().one()

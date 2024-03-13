@@ -25,10 +25,9 @@ def init_app():
     async def shutdown():
         await db.close()
         
-    from app.controller import helloworld, userController
+    from app.controller import helloworld
     
     app.include_router(helloworld.router)
-    app.include_router(userController.router)
         
     return app
 
