@@ -22,9 +22,7 @@ from datetime import datetime
     
 class UserSchema(BaseModel):
     username: str
-    password: str
     jwt_token: str
-    plaid_access_token: str
 
     class Config:
         orm_mode = True
