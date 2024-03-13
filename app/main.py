@@ -19,9 +19,9 @@ def init_app():
     async def shutdown():
         await db.close()
         
-    @app.get("/")
-    async def home():
-        return "hello world"
+    from app.controller import helloworld
+    
+    app.include_router(helloworld.router)
         
     return app
 
