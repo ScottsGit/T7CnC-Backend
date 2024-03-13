@@ -25,8 +25,6 @@ class UserSchema(BaseModel):
     password: str
     jwt_token: str
     plaid_access_token: str
-    time_created: datetime 
-    time_updated: datetime 
 
     class Config:
         orm_mode = True

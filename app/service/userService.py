@@ -11,4 +11,4 @@ class UserService:
     async def get_user_profile(username:str):
         query = select(Users.username, 
                         Users.email)
-        return(await db.execute(query)).mappings().one()
+        return (await db.execute(query)).mappings().one()
