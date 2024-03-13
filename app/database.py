@@ -1,13 +1,11 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import MetaData
+from app.config import Settings
 
-DB_CONFIG = f"postgresql+asyncpg://postgres:postgres@localhost:5432/postgres"
 
 
-SECRET_KEY = "T7CnC-Backend-Flatiron-Hacktho+ql)$ei+26))0qpw47)27yv8dveo4dv&yr2$d4_sy*jx3n$yi79"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
 metadata = MetaData()
 
 class AsyncDatabaseSession:
@@ -20,7 +18,7 @@ class AsyncDatabaseSession:
         return getattr(self.session,name)
 
     def init(self):
-        self.engine = create_async_engine(DB_CONFIG,future=True, echo=True)
+        self.engine = create_async_engine(Settings.DB_CONFIG,future=True, echo=True)
         self.session = sessionmaker(self.engine, expire_on_commit=False, class_=AsyncSession)()
 
     async def create_all(self):
