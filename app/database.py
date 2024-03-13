@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import MetaData
-from app.config import Settings
+from app.config import DB_CONFIG
 
 
 
@@ -18,7 +18,7 @@ class AsyncDatabaseSession:
         return getattr(self.session,name)
 
     def init(self):
-        self.engine = create_async_engine(Settings.DB_CONFIG,future=True, echo=True)
+        self.engine = create_async_engine(DB_CONFIG,future=True, echo=True)
         self.session = sessionmaker(self.engine, expire_on_commit=False, class_=AsyncSession)()
 
     async def create_all(self):
