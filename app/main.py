@@ -7,7 +7,6 @@ def init_app():
     
     app = FastAPI(
         title= "T7CnC-Backend",
-        description= "Login Page",
         version= "1"
     )
 
