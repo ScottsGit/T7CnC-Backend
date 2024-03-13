@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI, APIRouter
-from app.database import db
+from app.config import db
 
 def init_app():
     db.init()
