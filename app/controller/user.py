@@ -31,7 +31,8 @@ async def register(request_body: UserIn):
 
 @router.post("/token", response_model=ResponseSchema, response_model_exclude_none=True)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = await UserService.find_by_email(form_data.email)
+    _email = form_data.username
+    user = await UserService.find_by_email(_email)
     if not user or not AuthService.pwd_context.verify(
         form_data.password, user.hashed_password
     ):
