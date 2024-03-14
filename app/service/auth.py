@@ -18,12 +18,12 @@ from app.config import SECRET_KEY, ALGORITHM
 
 class AuthService:
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-    oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+    oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/access-token")
 
 
     @staticmethod
     async def get_current_user(
-        token: str = Depends(oauth2_scheme), db: Session = db
+        token: str = Depends(oauth2_scheme)
     ):
         credentials_exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -40,7 +40,7 @@ class AuthService:
             token_data = schema.TokenData(email=email)
         except JWTError:
             raise credentials_exception
-        user = UserService.find_by_email(email=token_data.email)
+        user = await UserService.find_by_email(email=token_data.email)
         if user is None:
             raise credentials_exception
         return user

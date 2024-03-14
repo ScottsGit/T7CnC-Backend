@@ -22,6 +22,13 @@ class UserBase(BaseModel):
 class UserIn(UserBase):
     password: str
     
+class UserInDBBase(UserBase):
+    id: int
 
+    class Config:
+        orm_mode = True
+
+class UserInDB(UserInDBBase):
+    hashed_password: str
 
 
