@@ -28,7 +28,7 @@ async def register(request_body: UserIn):
     return ResponseSchema(detail="Successfully registered!", result={"user_id": _user.id})
 
 
-@router.post("/login/access-token", response_model=ResponseSchema, response_model_exclude_none=True)
+@router.post("/login/access-token", response_model=Token, response_model_exclude_none=True)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     _email = form_data.username
     user = await UserService.find_by_email(_email)
@@ -44,4 +44,4 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     access_token = AuthService.create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
-    return ResponseSchema(detail="Successfully login", result={"access_token": access_token, "token_type": "bearer"})
+    return Token(access_token=access_token)

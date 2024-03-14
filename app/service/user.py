@@ -20,5 +20,5 @@ class UserService:
          
     @staticmethod
     async def get_user_profile_by_id(id:str):
-        query = select(Users).where(Users.id == id)
-        return(await db.execute(query)).mappings().one()
+        query = select(Users.id, Users.email).where(Users.id == id)
+        return (await db.execute(query)).mappings().one()
