@@ -4,6 +4,10 @@ from fastapi.routing import APIRoute
 from app.database import db
 from app.config import API_V1_STR
 
+origins= [
+    "http://localhost:3000"
+]
+
 def init_app():
     db.init()
     
@@ -12,7 +16,6 @@ def init_app():
 
     app = FastAPI(
         title= "T7CnC-Backend",
-        openapi_url=f"{API_V1_STR}/openapi.json",
         generate_unique_id_function=custom_generate_unique_id,
         version= "1",
     )

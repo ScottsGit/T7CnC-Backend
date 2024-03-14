@@ -1,12 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import MetaData
+from sqlmodel import SQLModel
+
 from app.config import DB_CONFIG
 
 
-
-
-metadata = MetaData()
 
 class AsyncDatabaseSession:
 
@@ -23,7 +21,7 @@ class AsyncDatabaseSession:
 
     async def create_all(self):
         async with self.engine.begin() as conn:
-            await conn.run_sync(metadata.create_all)
+            await conn.run_sync(SQLModel.metadata.create_all)
 
 
 db = AsyncDatabaseSession()
