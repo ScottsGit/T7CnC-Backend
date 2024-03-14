@@ -10,13 +10,9 @@ origins= [
 
 def init_app():
     db.init()
-    
-    def custom_generate_unique_id(route: APIRoute) -> str:
-        return f"{route.tags[0]}-{route.name}"
 
     app = FastAPI(
         title= "T7CnC-Backend",
-        generate_unique_id_function=custom_generate_unique_id,
         version= "1",
     )
 
@@ -28,9 +24,10 @@ def init_app():
     async def shutdown():
         await db.close()
         
-    from app.controller import helloworld
+    from app.controller import helloworld, user
     
     app.include_router(helloworld.router)
+    app.include_router(user.router)
         
     return app
 

@@ -4,34 +4,33 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from app import schema
+from app.schema import *
 from app.service.auth import AuthService
 from app.service.user import UserService
 from app.database import db
 from app.model import *
 from app.config import ACCESS_TOKEN_EXPIRE_MINUTES
-from app.database import commit_rollback
+from uuid import uuid4
+
 
 router = APIRouter()
 
 
-@router.post("/register/", response_model=schema.UserRegisterResponse)
-async def register(user_in: schema.UserIn, db: Session = db):
-    db_user = await UserService.find_by_email(user_in.email)
+@router.post("/register/", response_model=ResponseSchema, response_model_exclude_none=True)
+async def register(request_body: UserIn):
+    db_user = await UserService.find_by_email(request_body.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    hashed_password = AuthService.get_password_hash(user_in.password)
-    _user = Users(**user_in.dict(exclude={"password"}), hashed_password=hashed_password)
-    db.add(_user)
-    await commit_rollback()
-    return _user
+    hashed_password = AuthService.get_password_hash(request_body.password)
+    _users_id = str(uuid4())
+    _user = Users(**request_body.dict(exclude={"password"}), hashed_password=hashed_password, id=_users_id)
+    await UserService.create_user(_user)
+    return ResponseSchema(detail="Successfully registered!", result={"email": _user.email})
 
 
-@router.post("/token", response_model=schema.Token)
-async def login_for_access_token(
-    form_data: OAuth2PasswordRequestForm = Depends(), db: Session = db
-):
+@router.post("/token", response_model=ResponseSchema, response_model_exclude_none=True)
+async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = await UserService.find_by_email(form_data.email)
     if not user or not AuthService.pwd_context.verify(
         form_data.password, user.hashed_password
@@ -45,6 +44,7 @@ async def login_for_access_token(
     access_token = AuthService.create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
-    return {"access_token": access_token, "token_type": "bearer"}
+    return ResponseSchema(detail="Successfully login", result={"access_token": access_token, "token_type": "bearer"})
+
 
 

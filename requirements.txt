@@ -22,6 +22,7 @@ pycparser==2.21 ; python_version >= "3.12" and python_version < "4.0" and platfo
 pydantic-core==2.16.3 ; python_version >= "3.12" and python_version < "4.0"
 pydantic==2.6.4 ; python_version >= "3.12" and python_version < "4.0"
 python-jose[cryptography]==3.3.0 ; python_version >= "3.12" and python_version < "4.0"
+python-multipart==0.0.9 ; python_version >= "3.12" and python_version < "4.0"
 pytz==2024.1 ; python_version >= "3.12" and python_version < "4.0"
 rsa==4.9 ; python_version >= "3.12" and python_version < "4"
 setuptools==69.2.0 ; python_version >= "3.12" and python_version < "4.0"
