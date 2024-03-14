@@ -8,6 +8,6 @@ from app.database import db
 class UserService:
 
     @staticmethod
-    async def get_user(email:str):
-        query = select(Users.email)
-        return (await db.execute(query)).mappings().one()
+    async def find_by_email(email: str):
+        query = select(Users).where(Users.email == email)
+        return (await db.execute(query)).scalar_one_or_none()

@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 class TokenData(BaseModel):
-    username: Optional[str] = None
+    email: Optional[str] = None
 
 
 class Token(BaseModel):
@@ -10,3 +10,17 @@ class Token(BaseModel):
     token_type: str
     
     
+class UserRegisterResponse(UserBase):
+    id: int
+    email: str
+
+    class Config:
+        orm_mode = True
+
+
+
+class UserBase(BaseModel):
+    email: str
+    
+class UserIn(UserBase):
+    password: str
