@@ -37,5 +37,5 @@ Generate Initial Migration: Generate an initial migration script based on your e
 Apply Migration: Apply the migration to your database by running the following command:  
 (env) alembic upgrade head  
 
-Leave virtual env:
+Leave virtual env:  
 deactivate  
