@@ -17,6 +17,7 @@ router = APIRouter()
 
 @router.post("/register/", response_model=ResponseSchema, response_model_exclude_none=True)
 async def register(request_body: UserIn):
+    print(request_body)
     db_user = await UserService.find_by_email(request_body.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")

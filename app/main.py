@@ -1,11 +1,13 @@
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.routing import APIRoute
 from app.database import db
 from app.config import API_V1_STR
 
 origins= [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    '*'
 ]
 
 def init_app():
@@ -14,6 +16,14 @@ def init_app():
     app = FastAPI(
         title= "T7CnC-Backend",
         version= "1",
+    )
+    
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
     )
 
     @app.on_event("startup")
