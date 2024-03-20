@@ -33,8 +33,9 @@ async def register(request_body: UserIn):
 
 
 @router.post("/login/access-token", response_model=Token, response_model_exclude_none=True)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    _email = form_data.username
+async def login_for_access_token(form_data: UserIn):
+    print(form_data.dict())
+    _email = form_data.email
     user = await UserService.find_by_email(_email)
     if not user or not AuthService.pwd_context.verify(
         form_data.password, user.hashed_password
