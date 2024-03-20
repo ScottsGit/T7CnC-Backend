@@ -7,21 +7,25 @@ class ResponseSchema(BaseModel):
     detail: str
     result: Optional[T] = None
 
-class TokenData(BaseModel):
-    email: Optional[str] = None
-
 
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
 
+class PlaidToken(BaseModel):
+    plaid_token: str
+    token_type: str
+    
+class PlaidPublicTokenIn(BaseModel):
+    public_token: str 
+    
+class AccessTokenResponse(BaseModel):
+    access_token: str
+    item_id: str
 
 class UserBase(BaseModel):
     email: str
-    
-class UserIn(UserBase):
-    password: str
-    
+
 class UserInDBBase(UserBase):
     id: int
 
@@ -30,5 +34,10 @@ class UserInDBBase(UserBase):
 
 class UserInDB(UserInDBBase):
     hashed_password: str
+    
+class UserIn(UserBase):
+    password: str
+
+
 
 

@@ -22,3 +22,7 @@ class UserService:
     async def get_user_profile_by_id(id:str):
         query = select(Users.id, Users.email).where(Users.id == id)
         return (await db.execute(query)).mappings().one()
+    
+    @staticmethod
+    async def set_plaid_access_token(access_token:str):
+        return

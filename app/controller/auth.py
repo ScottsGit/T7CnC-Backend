@@ -12,7 +12,10 @@ from app.config import ACCESS_TOKEN_EXPIRE_MINUTES
 from uuid import uuid4
 
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api/auth",
+    tags=['auth']
+)
 
 
 @router.post("/register/", response_model=ResponseSchema, response_model_exclude_none=True)

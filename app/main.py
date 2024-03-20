@@ -34,11 +34,12 @@ def init_app():
     async def shutdown():
         await db.close()
         
-    from app.controller import helloworld, auth, user
+    from app.controller import helloworld, auth, user, plaid_controller
     
     app.include_router(helloworld.router)
     app.include_router(auth.router)
     app.include_router(user.router)
+    app.include_router(plaid_controller.router)
         
     return app
 
