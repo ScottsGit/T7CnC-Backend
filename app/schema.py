@@ -11,6 +11,7 @@ class ResponseSchema(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+    item_id: str = ""
 
 class PlaidToken(BaseModel):
     plaid_token: str
@@ -34,6 +35,7 @@ class UserInDBBase(UserBase):
 
 class UserInDB(UserInDBBase):
     hashed_password: str
+    plaid_access_token: str
     
 class UserIn(UserBase):
     password: str

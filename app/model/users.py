@@ -14,4 +14,5 @@ class Users(SQLModel,TimeMixin,table=True):
     hashed_password: str
     
     plaid_access_token : Optional[str]
+    item_id : Optional[str]
     

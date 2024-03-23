@@ -25,6 +25,7 @@ class AuthService:
     async def get_current_user(
         token: str = Depends(oauth2_scheme)
     ):
+        print(token)
         credentials_exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
@@ -35,12 +36,14 @@ class AuthService:
                 token, SECRET_KEY, algorithms=[ALGORITHM]
             )
             email: str = payload.get("sub")
+            print(email)
             if email is None:
                 raise credentials_exception
-            token_data = schema.TokenData(email=email)
+            # token_data = schema.TokenData(email=email)
         except JWTError:
             raise credentials_exception
-        user = await UserService.find_by_email(email=token_data.email)
+        user = await UserService.find_by_email(email=email)
+        print(user)
         if user is None:
             raise credentials_exception
         return user
@@ -57,7 +60,7 @@ class AuthService:
         if expires_delta:
             expire = datetime.now(timezone.utc) + expires_delta
         else:
-            expire = datetime.now(timezone.utc) + timedelta(minutes=15)
+            expire = datetime.now(timezone.utc) + timedelta(minutes=600)
         to_encode.update({"exp": expire})
         encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
         return encoded_jwt

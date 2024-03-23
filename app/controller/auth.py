@@ -34,9 +34,10 @@ async def register(request_body: UserIn):
 
 @router.post("/login/access-token", response_model=Token, response_model_exclude_none=True)
 async def login_for_access_token(form_data: UserIn):
-    print(form_data.dict())
+    print(form_data)
     _email = form_data.email
     user = await UserService.find_by_email(_email)
+    print(user)
     if not user or not AuthService.pwd_context.verify(
         form_data.password, user.hashed_password
     ):
@@ -49,4 +50,6 @@ async def login_for_access_token(form_data: UserIn):
     access_token = AuthService.create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
-    return Token(access_token=access_token)
+    
+    _item_id = user.item_id if user.item_id else ""
+    return Token(access_token=access_token, item_id=_item_id)
