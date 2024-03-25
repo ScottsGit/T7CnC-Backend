@@ -4,7 +4,7 @@ https://app.clickup.com/9014187266/v/dc/8cmk582-114/8cmk582-314
 
 
 ## Setup Project
-Python 3.12
+Python 3.12  
 Install Python  
 
 ### Poetry  
