@@ -20,7 +20,7 @@ Install Poetry: https://python-poetry.org/docs/
 poetry install  
 poetry run start  
 
-### Setup Backend Using virtual envirement  
+### Setup Backend Using virtual environment  
 python3 -m venv env  
 On Windows:  
 env\Scripts\activate  
