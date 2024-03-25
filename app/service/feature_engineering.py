@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from typing import List
 from app.data_schema import *
 from datetime import datetime, timedelta
@@ -8,7 +9,12 @@ def extract_data_from_transactions(transactions):
     formatted = []
     
     for trans in transactions:
-        category = trans['category'][1] if len(trans['category']) > 1 else trans['category'][0]
+        # category = trans['category'][1] if trans['category'] and len(trans['category']) > 1 else trans['category'][0]
+        if trans['category']:
+            category = trans['category'][1] if len(trans['category']) > 1 else trans['category'][0]
+        else:
+            category = 'None'
+            
         formatted.append({"category": str(category), 
                           "date": str(trans['date']), 
                           "name": str(trans['name']), 
@@ -171,6 +177,8 @@ def format_spends_by_date(transactions) -> pd.DataFrame:
     print(data)
     return data
 
+def add_random_number(x):
+    return x + np.random.randint(-34, 43)
 
 def prepare_spends_line_chart(df: pd.DataFrame):
     data = df.copy()
@@ -190,10 +198,12 @@ def prepare_spends_line_chart(df: pd.DataFrame):
     # Filter the DataFrame for the 30 days before the last 30 days
     previous_30_days_data = data[(data['date'] >= previous_30_days_start_date) & (data['date'] <= previous_30_days_end_date)].reset_index(drop=True)
     # previous_30_days_data['amount'] = previous_30_days_data['amount'] - previous_30_days_data['amount'].iloc[0]
+    previous_30_days_data['amount'] = previous_30_days_data['amount'].apply(add_random_number)
     
     # Filter the DataFrame for the last 30 days
     last_30_days_data = data[(data['date'] >= last_30_days_start_date) & (data['date'] <= last_30_days_end_date)].reset_index(drop=True)
     # last_30_days_data['amount'] = last_30_days_data['amount'] - last_30_days_data['amount'].iloc[0]
+    last_30_days_data['amount'] = last_30_days_data['amount'].apply(add_random_number)
     
     print("previous_30_days_data")
     print(previous_30_days_data)
@@ -234,11 +244,12 @@ def prepare_networth_line_chart(df: pd.DataFrame):
     # Filter the DataFrame for the 30 days before the last 30 days
     previous_30_days_data = data[(data['date'] >= previous_30_days_start_date) & (data['date'] <= previous_30_days_end_date)].reset_index(drop=True)
     previous_30_days_data['networth'] = previous_30_days_data['networth'] - previous_30_days_data['networth'].iloc[0]
+    previous_30_days_data['networth'] = previous_30_days_data['networth'].apply(add_random_number)
     
     # Filter the DataFrame for the last 30 days
     last_30_days_data = data[(data['date'] >= last_30_days_start_date) & (data['date'] <= last_30_days_end_date)].reset_index(drop=True)
     last_30_days_data['networth'] = last_30_days_data['networth'] - last_30_days_data['networth'].iloc[0] + random.randint(-100, 100)
-
+    last_30_days_data['networth'] = last_30_days_data['networth'].apply(add_random_number)
     
     print("previous_30_days_data")
     print(previous_30_days_data)

@@ -10,7 +10,7 @@ from app.schema import *
 from app.service.auth import AuthService
 
 router = APIRouter(
-    prefix="/users",
+    prefix="/api/users",
     tags=['user']
 )
 
