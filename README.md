@@ -48,4 +48,3 @@ deactivate
 You should see the tables in db:
 ![image](https://github.com/ScottsGit/T7CnC-Backend/assets/17536863/e4b79a89-7b47-4809-9a70-16b4b92aeed2)
 
-
