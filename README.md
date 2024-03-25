@@ -8,23 +8,32 @@ https://app.clickup.com/9014187266/v/dc/8cmk582-114/8cmk582-314
 Python 3.12  
 Install Python  
 
-### Poetry  
-Poetry is like 'npm' for packages management for Python projects.  
-Install Poetry: https://python-poetry.org/docs/  
-
 ### PostgreSQL
 Install PostgreSQL if you have not yet: https://www.postgresql.org/download/  
 
 ### PGAdmin  
 PGAdmin is for PostgreSQL management.  
 
-### Setup Backend
+### Setup Backend Using Poetry  
+Poetry is like 'npm' for packages management for Python projects.  
+Install Poetry: https://python-poetry.org/docs/  
 poetry install  
 poetry run start  
 
+### Setup Backend Using virtual envirement  
+python3 -m venv env  
+On Windows:  
+env\Scripts\activate  
+On macOS/Linux:  
+source env/bin/activate  
+pip install -r .\requirements.txt  
+uvicorn app.main:start  
+
+
 http://localhost:8888/helloworld/  
 Go to http://localhost:8888/docs, you should see:  
-![image](https://github.com/ScottsGit/T7CnC-Backend/assets/17536863/221d30d1-0c4f-4ea8-98e1-8168be13444b)  
+![image](https://github.com/ScottsGit/T7CnC-Backend/assets/17536863/a5593d1f-58d5-40a8-bb9f-7d40a8d6058d)  
+
 
 ### Database migration  
 python3 -m venv env  
