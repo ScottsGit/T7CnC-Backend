@@ -1,5 +1,4 @@
-# T7CnC-Backend
-Team 7 - Cash-n-Crunch Backend
+Team 7 - Cash-n-Crunch Data Science  
 A brief description of what I attempted here. Basically tried to do 2 forecasting models, one for a personal account that helped plan for 
 discretionary and necessary expenses. And one for a business account that helped forecast sales.
 Started off with:
