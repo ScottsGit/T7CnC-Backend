@@ -147,9 +147,6 @@ def create_link_token():
 # , current_user: UserInDB = Depends(AuthService.get_current_user)
 @router.post("/exchange_public_token", response_model=None, response_model_exclude_none=True)
 async def get_access_token(request: PlaidPublicTokenIn, current_user: UserInDB = Depends(AuthService.get_current_user)):
-    global access_token
-    global item_id
-    global transfer_id
     public_token = request.public_token
     print("exchange_public_token start")
     print(public_token)
