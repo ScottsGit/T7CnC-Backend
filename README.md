@@ -4,7 +4,7 @@
 https://www.loom.com/share/075a2c4ad7984c8ab295e1107402e207?sid=64ed78f2-3383-4884-88e5-3167ca47008b  
 
 ### Tech Stack  
-Language: Python  
+It is Async API and Database backend in Python  
 API Framework: FastAPI  
 Database: PostgreSQL  
 Model: SQLAlchemy(Asynchronous I/O (asyncio))  
