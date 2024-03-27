@@ -220,7 +220,7 @@ async def get_balance(current_user: UserInDB = Depends(AuthService.get_current_u
         request = AccountsBalanceGetRequest(
             access_token=current_user.plaid_access_token
         )
-        response = client.accounts_balance_get(request).to_dict()
+        response = await client.accounts_balance_get(request).to_dict()
         pretty_print_response(response['accounts'])
         return ResponseSchema(detail="Successfully received balance data", result={'balance': extract_data_from_balance(response['accounts'])})
     except plaid.ApiException as e:
@@ -274,7 +274,7 @@ async def get_spending_line(current_user: UserInDB = Depends(AuthService.get_cur
             start_date=start_date,
             end_date=end_date
         )
-        response = client.transactions_get(request).to_dict()
+        response = await client.transactions_get(request).to_dict()
 
         # Return the 8 most recent transactions
         trans = extract_data_from_transactions(response['transactions'])
@@ -301,7 +301,7 @@ async def get_networth_column(current_user: UserInDB = Depends(AuthService.get_c
             start_date=start_date,
             end_date=end_date
         )
-        response = client.transactions_get(request).to_dict()
+        response = await client.transactions_get(request).to_dict()
             
         # Return the 8 most recent transactions
         trans = extract_data_from_transactions(response['transactions'])
@@ -333,7 +333,7 @@ async def get_spends_polar(current_user: UserInDB = Depends(AuthService.get_curr
             start_date=start_date,
             end_date=end_date
         )
-        response = client.transactions_get(request).to_dict()
+        response = await client.transactions_get(request).to_dict()
             
         # Return the 8 most recent transactions
         trans = extract_data_from_transactions(response['transactions'])
