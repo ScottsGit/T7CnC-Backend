@@ -1,3 +1,9 @@
+
+
+### Full Project Demo Video
+https://www.loom.com/share/075a2c4ad7984c8ab295e1107402e207?sid=64ed78f2-3383-4884-88e5-3167ca47008b  
+
+
 ## API Documentation    
 https://app.clickup.com/9014187266/v/dc/8cmk582-114/8cmk582-314  
 ![image](https://github.com/ScottsGit/T7CnC-Backend/assets/17536863/9a2e50cf-58b0-4c57-bae8-90496eea4753)
