@@ -3,6 +3,19 @@
 ### Full Project Demo Video (5 mins)  
 https://www.loom.com/share/075a2c4ad7984c8ab295e1107402e207?sid=64ed78f2-3383-4884-88e5-3167ca47008b  
 
+### Tech Stack  
+Language: Python  
+API Framework: FastAPI  
+Database: PostgreSQL  
+Model: SQLAlchemy(Asynchronous I/O (asyncio))  
+Data Validation/Serialization: Pydantic  
+Database Migration: Alembic  
+Authorization: JWT   
+SaaS Provider:   
+Plaid(sandbox)  
+
+
+
 
 ## API Documentation    
 https://app.clickup.com/9014187266/v/dc/8cmk582-114/8cmk582-314  
