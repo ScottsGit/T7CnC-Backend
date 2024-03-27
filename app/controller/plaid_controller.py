@@ -156,7 +156,7 @@ async def get_access_token(request: PlaidPublicTokenIn, current_user: UserInDB =
     try:
         exchange_request = ItemPublicTokenExchangeRequest(
             public_token=public_token)
-        exchange_response = client.item_public_token_exchange(exchange_request)
+        exchange_response = await client.item_public_token_exchange(exchange_request)
         plaid_access_token = exchange_response['access_token']
         item_id = exchange_response['item_id']
         
